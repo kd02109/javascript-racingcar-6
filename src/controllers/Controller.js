@@ -11,14 +11,14 @@ class Controller {
   async startGame() {
     this.#cars = new Cars();
 
-    await this.controlCarOutput();
-    await this.controlTurnsOutput();
+    await this.#controlCarOutput();
+    await this.#controlTurnsOutput();
 
-    this.calculateRacingGame(this.#cars.getTurns());
+    this.#calculateRacingGame(this.#cars.getTurns());
   }
 
   // 차량 입력 값 변환 및 validation
-  async controlCarOutput() {
+  async #controlCarOutput() {
     const carString = await View.writeRaingGameCarNames();
     Controller.#checkValidateCar(carString.trim());
     this.#cars.setCars(Controller.#makeCarsArray(carString));
@@ -46,7 +46,7 @@ class Controller {
   }
 
   // 레이싱 게임 턴 입력 및 validation
-  async controlTurnsOutput() {
+  async #controlTurnsOutput() {
     const output = await View.writeRacingGameCounts();
     Controller.#checkValidateTurns(output.trim());
     this.#cars.setTurns(Number(output));
@@ -59,7 +59,7 @@ class Controller {
   }
 
   // 게임 진행
-  calculateRacingGame(turns) {
+  #calculateRacingGame(turns) {
     const carsNameList = this.#cars.getCars();
     View.printRacingGameStart();
 
