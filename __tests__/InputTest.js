@@ -1,8 +1,8 @@
-import { Console } from "@woowacourse/mission-utils";
 import Controller from "../src/controllers/Controller.js";
+import { Console } from "@woowacourse/mission-utils";
 import { ERROR_MESSAGE } from "../src/constants/message.js";
 import { mockQuestions } from "./ApplicationTest.js";
-import TEST_CAR_LENGTH from "../src/constants/testValue.js";
+import { TEST_CAR_LENGTH } from "../src/constants/testValue.js";
 
 const mockConsole = (input) => {
     Console.readLineAsync = jest.fn();
@@ -47,8 +47,8 @@ describe("입력 값 에러 테스트 차량", ()=>{
 
 describe("게임 진행 입력 횟수 에러 테스트", ()=> {
     test.each([[["as, dq", '#'], ["as, dq", '0'], ["as, dq", 'a'], ["as, dq", '101'], ['a,b', '-1'], ['a,b', '9.6']]])("게임 진행 횟수 입력 오류 확인", async (input)=>{
-       const controllers = new Controller()
-       mockQuestions(input)
+       const controllers = new Controller();
+       mockQuestions(input);
        await expect(controllers.startGame()).rejects.toThrow(ERROR_MESSAGE.TURN_ERROR);
     })
 })

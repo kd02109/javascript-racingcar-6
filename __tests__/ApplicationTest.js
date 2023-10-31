@@ -1,4 +1,5 @@
 import { MissionUtils } from '@woowacourse/mission-utils';
+import { MOVING_FORWARD, STOP } from '../src/constants/testValue.js';
 import App from '../src/App.js';
 
 export const mockQuestions = (inputs) => {
@@ -10,21 +11,20 @@ export const mockQuestions = (inputs) => {
   });
 };
 
-const mockRandoms = (numbers) => {
+export const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
   numbers.reduce((acc, number) => {
     return acc.mockReturnValueOnce(number);
   }, MissionUtils.Random.pickNumberInRange);
 };
 
-const getLogSpy = () => {
+export const getLogSpy = () => {
   const logSpy = jest.spyOn(MissionUtils.Console, 'print');
   logSpy.mockClear();
   return logSpy;
 };
 
-const MOVING_FORWARD = 4;
-const STOP = 3;
+
 
 describe('자동차 경주 게임', () => {
   test('2대의 자동차와 1회 경주', async () => {
@@ -52,7 +52,7 @@ describe('자동차 경주 게임', () => {
     // given
     const inputs = ['jun, yeon, hyo', '3'];
     const outputs = ['최종 우승자 : hyo'];
-    const randoms = [4, 5, 6, 3, 4, 5, 7, 6, 8];
+    const randoms = [STOP, MOVING_FORWARD, MOVING_FORWARD, STOP, MOVING_FORWARD, MOVING_FORWARD, STOP, STOP, MOVING_FORWARD];
     const logSpy = getLogSpy();
 
     mockQuestions(inputs);
